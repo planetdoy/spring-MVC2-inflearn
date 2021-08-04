@@ -91,19 +91,23 @@ public class BasicController {
     @GetMapping("/each")
     public String each(Model model) {
         addUsers(model);
-
         return "basic/each";
     }
 
-    private void addUsers(Model model) {
-        List<User> list = new ArrayList<>();
-        list.add(new User("userA", 10));
-        list.add(new User("userB", 20));
-        list.add(new User("userC", 30));
-
-        model.addAttribute("list", list);
+    @GetMapping("/condition")
+    public String condition(Model model) {
+        addUsers(model);
+        return "basic/condition";
     }
 
+    private void addUsers(Model model) {
+        List<User> users = new ArrayList<>();
+        users.add(new User("userA", 10));
+        users.add(new User("userB", 20));
+        users.add(new User("userC", 30));
+
+        model.addAttribute("users", users);
+    }
 
     @Component("helloBean")
     static class HelloBean {
@@ -111,7 +115,6 @@ public class BasicController {
             return "Hello" + data;
         }
     }
-
 
     @Data
     static class User {
